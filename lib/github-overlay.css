@@ -1,0 +1,663 @@
+/* ============================================================
+   DepConfusion Scanner — GitHub Overlay Styles
+   ============================================================ */
+
+:root {
+  --dcs-bg: #0d1117;
+  --dcs-bg-surface: #161b22;
+  --dcs-bg-elevated: #1c2128;
+  --dcs-border: #30363d;
+  --dcs-text: #e6edf3;
+  --dcs-text-muted: #8b949e;
+  --dcs-accent: #58a6ff;
+  --dcs-danger: #f85149;
+  --dcs-warning: #d29922;
+  --dcs-success: #3fb950;
+  --dcs-critical-bg: rgba(248, 81, 73, 0.1);
+  --dcs-high-bg: rgba(248, 81, 73, 0.07);
+  --dcs-medium-bg: rgba(210, 153, 34, 0.08);
+  --dcs-radius: 8px;
+  --dcs-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
+}
+
+/* Floating Button */
+#dcs-float-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 99999;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6e40c9 0%, #f85149 100%);
+  border: 2px solid rgba(255,255,255,0.15);
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(110, 64, 201, 0.5), 0 2px 8px rgba(0,0,0,0.4);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: dcs-pulse 3s ease-in-out infinite;
+}
+
+#dcs-float-btn:hover {
+  transform: scale(1.12);
+  box-shadow: 0 6px 28px rgba(110, 64, 201, 0.7), 0 3px 12px rgba(0,0,0,0.5);
+}
+
+@keyframes dcs-pulse {
+  0%, 100% { box-shadow: 0 4px 20px rgba(110, 64, 201, 0.5), 0 2px 8px rgba(0,0,0,0.4); }
+  50% { box-shadow: 0 4px 30px rgba(110, 64, 201, 0.7), 0 2px 12px rgba(0,0,0,0.5); }
+}
+
+/* Panel */
+#depconfusion-panel {
+  position: fixed;
+  top: 72px;
+  right: 16px;
+  width: 460px;
+  max-height: calc(100vh - 100px);
+  background: var(--dcs-bg);
+  border: 1px solid var(--dcs-border);
+  border-radius: 12px;
+  z-index: 100000;
+  font-family: var(--dcs-font);
+  font-size: 13px;
+  color: var(--dcs-text);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.05);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#depconfusion-panel.dcs-minimized {
+  max-height: 44px;
+  overflow: hidden;
+}
+
+#depconfusion-panel.dcs-minimized .dcs-body {
+  display: none;
+}
+
+/* Header */
+.dcs-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background: var(--dcs-bg-surface);
+  border-bottom: 1px solid var(--dcs-border);
+  flex-shrink: 0;
+}
+
+.dcs-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--dcs-text);
+}
+
+.dcs-logo svg {
+  color: #6e40c9;
+}
+
+.dcs-controls {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+/* Buttons */
+.dcs-btn {
+  padding: 5px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--dcs-border);
+  background: var(--dcs-bg-elevated);
+  color: var(--dcs-text);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.15s ease;
+  font-family: var(--dcs-font);
+}
+
+.dcs-btn:hover {
+  background: var(--dcs-border);
+}
+
+.dcs-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.dcs-btn-scan {
+  background: linear-gradient(135deg, #6e40c9, #8957e5);
+  border-color: #8957e5;
+  color: #fff;
+}
+
+.dcs-btn-scan:hover {
+  background: linear-gradient(135deg, #7c4ddb, #9a6aea);
+}
+
+.dcs-btn-icon {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border-radius: 6px;
+  border: none;
+  background: transparent;
+  color: var(--dcs-text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+}
+
+.dcs-btn-icon:hover {
+  background: var(--dcs-bg-elevated);
+  color: var(--dcs-text);
+}
+
+/* Body */
+.dcs-body {
+  overflow-y: auto;
+  max-height: calc(100vh - 160px);
+  padding: 12px;
+}
+
+.dcs-body::-webkit-scrollbar {
+  width: 6px;
+}
+
+.dcs-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.dcs-body::-webkit-scrollbar-thumb {
+  background: var(--dcs-border);
+  border-radius: 3px;
+}
+
+/* Status */
+.dcs-status {
+  padding: 10px 12px;
+  background: var(--dcs-bg-surface);
+  border-radius: var(--dcs-radius);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+.dcs-status code {
+  background: var(--dcs-bg-elevated);
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-size: 11px;
+}
+
+.dcs-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--dcs-text-muted);
+  flex-shrink: 0;
+}
+
+.dcs-status-dot.dcs-scanning {
+  background: var(--dcs-accent);
+  animation: dcs-blink 1s ease-in-out infinite;
+}
+
+.dcs-status-dot.dcs-danger {
+  background: var(--dcs-danger);
+}
+
+.dcs-status-dot.dcs-safe {
+  background: var(--dcs-success);
+}
+
+.dcs-status-dot.dcs-warn {
+  background: var(--dcs-warning);
+}
+
+.dcs-status-dot.dcs-error {
+  background: var(--dcs-danger);
+}
+
+@keyframes dcs-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* Summary Badges */
+.dcs-summary {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.dcs-badge {
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.dcs-badge-critical {
+  background: rgba(248, 81, 73, 0.2);
+  color: #f85149;
+  border: 1px solid rgba(248, 81, 73, 0.3);
+}
+
+.dcs-badge-high {
+  background: rgba(248, 81, 73, 0.12);
+  color: #ff7b72;
+  border: 1px solid rgba(248, 81, 73, 0.2);
+}
+
+.dcs-badge-medium {
+  background: rgba(210, 153, 34, 0.15);
+  color: #d29922;
+  border: 1px solid rgba(210, 153, 34, 0.25);
+}
+
+.dcs-badge-info {
+  background: rgba(88, 166, 255, 0.1);
+  color: #58a6ff;
+  border: 1px solid rgba(88, 166, 255, 0.2);
+}
+
+/* Sections */
+.dcs-section {
+  margin-bottom: 12px;
+}
+
+.dcs-section-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--dcs-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--dcs-border);
+}
+
+.dcs-collapsible {
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dcs-collapsible:hover {
+  color: var(--dcs-text);
+}
+
+.dcs-chevron {
+  font-size: 11px;
+}
+
+/* Finding Card */
+.dcs-finding {
+  background: var(--dcs-bg-surface);
+  border: 1px solid var(--dcs-border);
+  border-radius: var(--dcs-radius);
+  margin-bottom: 8px;
+  overflow: hidden;
+  transition: border-color 0.2s ease;
+}
+
+.dcs-finding:hover {
+  border-color: #484f58;
+}
+
+.dcs-finding-critical {
+  border-left: 3px solid var(--dcs-danger);
+  background: var(--dcs-critical-bg);
+}
+
+.dcs-finding-high {
+  border-left: 3px solid #ff7b72;
+  background: var(--dcs-high-bg);
+}
+
+.dcs-finding-medium {
+  border-left: 3px solid var(--dcs-warning);
+  background: var(--dcs-medium-bg);
+}
+
+.dcs-finding-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px 6px;
+}
+
+.dcs-severity-tag {
+  padding: 2px 7px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.dcs-severity-critical {
+  background: rgba(248, 81, 73, 0.2);
+  color: #f85149;
+}
+
+.dcs-severity-high {
+  background: rgba(255, 123, 114, 0.15);
+  color: #ff7b72;
+}
+
+.dcs-severity-medium {
+  background: rgba(210, 153, 34, 0.15);
+  color: #d29922;
+}
+
+.dcs-pkg-name {
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--dcs-text);
+  flex: 1;
+}
+
+.dcs-eco-tag {
+  padding: 2px 7px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.dcs-finding-details {
+  padding: 4px 12px 10px;
+}
+
+.dcs-detail-row {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 4px;
+  font-size: 12px;
+  line-height: 1.5;
+  flex-wrap: wrap;
+}
+
+.dcs-label {
+  color: var(--dcs-text-muted);
+  font-weight: 500;
+  flex-shrink: 0;
+  min-width: 55px;
+}
+
+.dcs-file-link {
+  color: var(--dcs-accent);
+  text-decoration: none;
+  word-break: break-all;
+}
+
+.dcs-file-link:hover {
+  text-decoration: underline;
+}
+
+.dcs-reason {
+  margin-top: 4px;
+  padding-top: 4px;
+  border-top: 1px solid rgba(48, 54, 61, 0.5);
+}
+
+.dcs-finding-details code {
+  background: var(--dcs-bg-elevated);
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-size: 11px;
+  color: var(--dcs-text);
+}
+
+/* POC Box */
+.dcs-poc-box {
+  margin-top: 8px;
+  padding: 8px 10px;
+  background: rgba(110, 64, 201, 0.08);
+  border: 1px solid rgba(110, 64, 201, 0.2);
+  border-radius: 6px;
+}
+
+.dcs-poc-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: #b180f7;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 6px;
+}
+
+.dcs-poc-box a {
+  color: #b180f7;
+  text-decoration: none;
+  word-break: break-all;
+}
+
+.dcs-poc-box a:hover {
+  text-decoration: underline;
+}
+
+.dcs-poc-box code {
+  background: rgba(110, 64, 201, 0.15);
+  color: #d2b5f7;
+}
+
+/* Safe List */
+.dcs-safe-list {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.dcs-safe-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 8px;
+  font-size: 12px;
+  border-bottom: 1px solid rgba(48, 54, 61, 0.3);
+}
+
+.dcs-safe-item:last-child {
+  border-bottom: none;
+}
+
+.dcs-safe-check {
+  color: var(--dcs-success);
+  margin-left: auto;
+  font-weight: 700;
+}
+
+/* Actions */
+.dcs-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--dcs-border);
+}
+
+.dcs-btn-export {
+  flex: 1;
+  justify-content: center;
+  font-size: 11px;
+  padding: 6px 10px;
+}
+
+/* Responsive */
+@media (max-width: 520px) {
+  #depconfusion-panel {
+    width: calc(100vw - 32px);
+    right: 16px;
+    left: 16px;
+  }
+}
+
+/* Multi-repo scan styles */
+.dcs-repo-row {
+  transition: background 0.15s ease;
+}
+
+.dcs-repo-row:hover {
+  background: rgba(88, 166, 255, 0.04) !important;
+}
+
+#dcs-repo-list {
+  max-height: 200px;
+  overflow-y: auto;
+  margin-bottom: 8px;
+}
+
+#dcs-repo-list::-webkit-scrollbar {
+  width: 4px;
+}
+
+#dcs-repo-list::-webkit-scrollbar-thumb {
+  background: var(--dcs-border);
+  border-radius: 2px;
+}
+
+#dcs-stop-btn {
+  transition: all 0.15s ease;
+}
+
+#dcs-stop-btn:hover {
+  background: #ef4444 !important;
+}
+
+/* ── Multi-Repo Progress ─────────────────────────────────── */
+
+.dcs-multi-progress {
+  margin-bottom: 10px;
+}
+
+.dcs-multi-bar {
+  height: 6px;
+  background: var(--dcs-bg-elevated);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 4px;
+}
+
+.dcs-multi-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #6e40c9, #f472b6);
+  border-radius: 3px;
+  width: 0%;
+  transition: width 0.4s ease;
+}
+
+.dcs-multi-text {
+  font-size: 11px;
+  color: var(--dcs-text-muted);
+  text-align: center;
+}
+
+.dcs-repo-list {
+  max-height: 250px;
+  overflow-y: auto;
+  margin-bottom: 10px;
+}
+
+.dcs-repo-list::-webkit-scrollbar {
+  width: 4px;
+}
+
+.dcs-repo-list::-webkit-scrollbar-thumb {
+  background: var(--dcs-border);
+  border-radius: 2px;
+}
+
+.dcs-repo-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 8px;
+  font-size: 12px;
+  border-bottom: 1px solid rgba(48, 54, 61, 0.3);
+  transition: background 0.15s ease;
+}
+
+.dcs-repo-item:hover {
+  background: rgba(48, 54, 61, 0.2);
+}
+
+.dcs-repo-item:last-child {
+  border-bottom: none;
+}
+
+.dcs-repo-spinner {
+  flex-shrink: 0;
+  width: 16px;
+  font-size: 13px;
+  text-align: center;
+  color: var(--dcs-accent);
+  animation: dcs-spin 1.5s linear infinite;
+}
+
+@keyframes dcs-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.dcs-repo-link {
+  color: var(--dcs-accent);
+  text-decoration: none;
+  font-weight: 500;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dcs-repo-link:hover {
+  text-decoration: underline;
+}
+
+.dcs-repo-lang {
+  font-size: 10px;
+  color: var(--dcs-text-muted);
+  padding: 1px 5px;
+  background: var(--dcs-bg-elevated);
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+.dcs-repo-fork {
+  font-size: 9px;
+  color: var(--dcs-text-muted);
+  padding: 1px 5px;
+  border: 1px solid var(--dcs-border);
+  border-radius: 3px;
+  flex-shrink: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.dcs-repo-status {
+  font-size: 11px;
+  color: var(--dcs-text-muted);
+  flex-shrink: 0;
+  text-align: right;
+  min-width: 80px;
+}
